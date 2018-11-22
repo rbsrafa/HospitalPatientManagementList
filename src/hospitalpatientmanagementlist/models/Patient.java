@@ -19,6 +19,15 @@ public class Patient {
     private String email;
     private String city;
     
+    /**
+     * Create a Patient with given arguments
+     * @param ppsNumber
+     * @param firstName
+     * @param lastName
+     * @param mobileNumber
+     * @param email
+     * @param city 
+     */
     public Patient(String ppsNumber, String firstName, String lastName, String mobileNumber, String email, String city){
         this.PID = ++counter;
         this.ppsNumber = ppsNumber;
@@ -29,6 +38,10 @@ public class Patient {
         this.city = city;
     }
     
+    /**
+     * Get a string representation of a patient
+     * @return a patient representation
+     */
     @Override
     public String toString(){
         return String.format("Patient \n PID: %s \n PPS Number: %s \n Name: %s %s \n Mobile Number: %s \n Email: %s \n City: %s\n", PID, ppsNumber, firstName, lastName, mobileNumber, email, city);

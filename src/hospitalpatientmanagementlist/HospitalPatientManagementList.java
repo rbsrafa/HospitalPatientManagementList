@@ -6,6 +6,7 @@
 package hospitalpatientmanagementlist;
 
 import hospitalpatientmanagementlist.libraries.Node;
+import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
 import hospitalpatientmanagementlist.models.Patient;
 
@@ -19,14 +20,19 @@ public class HospitalPatientManagementList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        PatientList patientList = new PatientList();
         Patient[] patients = new PatientGenerator().generatePatients();
         
         Node[] nodes = new Node[6];
         for(int i = 0; i < patients.length; i++){
             nodes[i] = new Node(patients[i]);
         }
+
+
+        patientList.addFirst(patients[0]);
+        patientList.addFirst(patients[1]);
         
-        for(Node n : nodes) System.out.println(n.getPatient()); 
+        patientList.display();
         
     }
     
