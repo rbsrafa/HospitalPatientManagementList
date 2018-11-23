@@ -5,6 +5,7 @@
  */
 package hospitalpatientmanagementlist.libraries;
 
+import hospitalpatientmanagementlist.exceptions.ListIsEmptyException;
 import hospitalpatientmanagementlist.models.Patient;
 
 /**
@@ -46,11 +47,13 @@ public class PatientList implements INode{
     public void display(){     
         Node current = this.first;
         // Print a message if the list is empty
-        if(this.isEmpty()) System.out.println("Patient list is empty");
+        if(this.isEmpty()) System.out.println(new ListIsEmptyException().getMessage());  
         else {
+            int position = 0;
             // Iterate over list and print each patient
             while(current != null){
-                System.out.println(current.getPatient());
+                ++position;
+                System.out.println("Patient " + Integer.toString(position) + "\n----------\n" + current.getPatient());
                 current = current.getNext();
             }
         }
@@ -65,10 +68,34 @@ public class PatientList implements INode{
     public int getPositionByPID(int PID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    /**
+     * Get the last patient in the list. If the list is empty
+     * throw a ListIsEmptyException
+     * @return the last patient
+     */
+    public Patient getLast(){
+        Patient last = null;
+        if(this.isEmpty()) throw new ListIsEmptyException();
+        else last = this.getLastNode().getPatient();
+        return last;
+    }
 
+    /**
+     * Add a patient to the end of the list. If the list is empty
+     * add the given patient as the first.
+     * @param patient
+     * @return the added patient 
+     */
     @Override
     public Patient addLast(Patient patient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // If list is empty add as first
+        if(this.isEmpty()) this.addFirst(patient);
+        else{
+            // Get the last node and set a new last node with the given patient
+            this.getLastNode().setNext(new Node(patient));
+        }
+        return patient;
     }
 
     @Override
@@ -90,7 +117,7 @@ public class PatientList implements INode{
     @Override
     public Patient addFirst(Patient patient) {
         // If list is empty set the given patient as first
-        if(this.first == null) this.first = new Node(patient);
+        if(this.isEmpty()) this.first = new Node(patient);
         else{
             // Copy first node in memory
             Node temp = this.first;
@@ -113,6 +140,24 @@ public class PatientList implements INode{
     @Override
     public Patient updatePatientInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * Get the last node in the list. If the list is empty throw
+     * a ListIsEmptyException.
+     * @return the last node in the list 
+     */
+    private Node getLastNode(){
+        Node last = null;
+        if(this.isEmpty()) throw new ListIsEmptyException();
+        else{
+            Node current = this.first;
+            while(current != null){
+                if(current.getNext() == null) last = current;
+                current = current.getNext();
+            }
+        }
+        return last;
     }
     
     /**

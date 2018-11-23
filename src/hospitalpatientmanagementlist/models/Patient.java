@@ -44,7 +44,7 @@ public class Patient {
      */
     @Override
     public String toString(){
-        return String.format("Patient \n PID: %s \n PPS Number: %s \n Name: %s %s \n Mobile Number: %s \n Email: %s \n City: %s\n", PID, ppsNumber, firstName, lastName, mobileNumber, email, city);
+        return String.format("PID: %s \nPPS Number: %s \nName: %s %s \nMobile Number: %s \nEmail: %s \nCity: %s\n", PID, ppsNumber, firstName, lastName, mobileNumber, email, city);
     }
 
     public String getFirstName() {
