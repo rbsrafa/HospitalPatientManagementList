@@ -6,6 +6,7 @@
 package hospitalpatientmanagementlist.libraries;
 
 import hospitalpatientmanagementlist.exceptions.ListIsEmptyException;
+import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.models.Patient;
 
@@ -82,6 +83,7 @@ public class PatientList implements INode{
      * @return the first node
      */
     public Patient getFirst() {
+        if(this.isEmpty()) throw new ListIsEmptyException();
         return first.getPatient();
     }
     
@@ -93,6 +95,7 @@ public class PatientList implements INode{
      */
     @Override
     public Patient addLast(Patient patient) {
+        if(this.isEmpty()) return this.addFirst(patient);
         this.getLastNode().setNext(new Node(patient));
         ++size;
         return this.getLast();
@@ -115,12 +118,13 @@ public class PatientList implements INode{
      */
     @Override
     public Patient addInPosition(Patient patient, int position) {
-        // add the given patient in position 3
-        Node temp = this.getNode(position);
         Node inserted = null;
         
         if(position == 1) return this.addFirst(patient);
+        else if(this.isEmpty() && position > 1) throw new PositionNotAvailableException();
+        else if(this.size + 1 == position) return this.addLast(patient);
         else{
+            Node temp = this.getNode(position);      
             Node before = this.getNode(position-1);
             inserted = new Node(patient, temp);
             before.setNext(inserted);
@@ -137,6 +141,13 @@ public class PatientList implements INode{
         return size;
     }
     
+    /**
+     * Get the node in the given position. If the list is empty throw
+     * ListIsEmptyException, if the position is not available throw
+     * PositionNotAvailableException.
+     * @param position
+     * @return the node in the given position 
+     */
     private Node getNode(int position){
         if(this.isEmpty()) throw new ListIsEmptyException();
         else if(position <=0 || position > this.size) throw new PositionNotAvailableException();
@@ -167,7 +178,13 @@ public class PatientList implements INode{
         return last;
     }
     
+    @Override
+    public boolean removePatient(int PID) {
+
+        return false;
+    }
     
+
     
     
     
@@ -189,11 +206,6 @@ public class PatientList implements INode{
 
     @Override
     public int getPositionByPID(int PID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean removePatient(int PID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

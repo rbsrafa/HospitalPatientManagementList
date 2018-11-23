@@ -28,21 +28,20 @@ public class HospitalPatientManagementList {
             nodes[i] = new Node(patients[i]);
         }
 
-
-        patientList.addFirst(patients[1]);
         patientList.addFirst(patients[0]);
-        patientList.addLast(patients[5]);
-
-
+        //patientList.addLast(patients[1]);
+        //patientList.addLast(patients[2]);
+//        patientList.addLast(patients[3]);
+        
+        
+        System.out.println(patientList.removePatient(1)); 
+        
+        
+        
+        
         
         patientList.display();
-
-        System.out.println("New -----------------\n");
-        patientList.addInPosition(patients[3], 1);
-        patientList.display();
-        
-        
-        
+        System.out.println(patientList.getSize());
     }
     
 }

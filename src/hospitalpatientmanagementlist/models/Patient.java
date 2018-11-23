@@ -47,50 +47,98 @@ public class Patient {
         return String.format("PID: %s \nPPS Number: %s \nName: %s %s \nMobile Number: %s \nEmail: %s \nCity: %s\n", PID, ppsNumber, firstName, lastName, mobileNumber, email, city);
     }
 
+    /**
+     * Get the first name
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Set the first name
+     * @param firstName 
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Get the last name
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Set the last name
+     * @param lastName 
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Get the mobile number
+     * @return the mobile number
+     */
     public String getMobileNumber() {
         return mobileNumber;
     }
 
+    /**
+     * Set the mobile number
+     * @param mobileNumber 
+     */
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
+    /**
+     * Get the email
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Set the email
+     * @param email 
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Get the city
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Set the city
+     * @param city 
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Get the patient id
+     * @return the PID
+     */
     public int getPID() {
         return PID;
     }
 
+    /**
+     * Get the pps number
+     * @return the ppsNumber
+     */
     public String getPpsNumber() {
         return ppsNumber;
     }

@@ -10,5 +10,9 @@ package hospitalpatientmanagementlist.exceptions;
  * @author rbsrafa
  */
 public class PatientNotFoundException extends RuntimeException{
+
+    public PatientNotFoundException(int id) {
+        super("Patient id " + id + " not found");
+    }
     
 }
