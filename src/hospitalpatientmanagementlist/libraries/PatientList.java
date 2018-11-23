@@ -6,6 +6,7 @@
 package hospitalpatientmanagementlist.libraries;
 
 import hospitalpatientmanagementlist.exceptions.ListIsEmptyException;
+import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.models.Patient;
 
 /**
@@ -15,6 +16,8 @@ import hospitalpatientmanagementlist.models.Patient;
 public class PatientList implements INode{
     private Node first;
     private int size;
+    
+    //   CONSTRUCTORS   //
     
     /**
      * Create a empty patient list
@@ -31,6 +34,8 @@ public class PatientList implements INode{
         this.first = first;
         this.size = 1;
     }
+    
+    //   METHODS   //
     
     /**
      * Check if the list is empty.
@@ -58,6 +63,96 @@ public class PatientList implements INode{
             }
         }
     }
+    
+    /**
+     * Add a given patient as the first of the list, if the list is not
+     * empty, set the old first patient as second of the list.
+     * @param patient
+     * @return the new first patient in the list
+     */
+    @Override
+    public Patient addFirst(Patient patient) {
+        this.first = new Node(patient, this.first);
+        this.size++;
+        return this.first.getPatient();
+    }
+    
+    /**
+     * Get the first node of the list
+     * @return the first node
+     */
+    public Patient getFirst() {
+        return first.getPatient();
+    }
+    
+    /**
+     * Add a patient to the end of the list. If the list is empty
+     * add the given patient as the first.
+     * @param patient
+     * @return the added patient 
+     */
+    @Override
+    public Patient addLast(Patient patient) {
+        this.getLastNode().setNext(new Node(patient));
+        ++size;
+        return this.getLast();
+    }
+    
+    /**
+     * Get the last patient in the list.
+     * @return the last patient
+     */
+    public Patient getLast(){
+        return this.getLastNode().getPatient();
+    }
+    
+    /**
+     * Get the size of the list
+     * @return list size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * Get the last node in the list. If the list is empty throw
+     * a ListIsEmptyException.
+     * @return the last node in the list 
+     */
+    private Node getLastNode(){
+        if(this.isEmpty()) throw new ListIsEmptyException();
+        Node current = this.first;
+        Node last = null;
+        while(current != null){
+            if(current.getNext() == null) last = current;
+            current = current.getNext();
+        }
+        return last;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public int getPositionByName(String first, String last) {
@@ -69,67 +164,9 @@ public class PatientList implements INode{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    /**
-     * Get the last patient in the list. If the list is empty
-     * throw a ListIsEmptyException
-     * @return the last patient
-     */
-    public Patient getLast(){
-        Patient last = null;
-        if(this.isEmpty()) throw new ListIsEmptyException();
-        else last = this.getLastNode().getPatient();
-        return last;
-    }
-
-    /**
-     * Add a patient to the end of the list. If the list is empty
-     * add the given patient as the first.
-     * @param patient
-     * @return the added patient 
-     */
-    @Override
-    public Patient addLast(Patient patient) {
-        // If list is empty add as first
-        if(this.isEmpty()) this.addFirst(patient);
-        else{
-            // Get the last node and set a new last node with the given patient
-            this.getLastNode().setNext(new Node(patient));
-        }
-        return patient;
-    }
-
-    @Override
-    public Patient addInPosition(Patient patient, int position) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public boolean removePatient(int PID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Add a given patient as the first of the list, if the list is not
-     * empty, set the old first patient as second of the list.
-     * @param patient
-     * @return the new first patient in the list
-     */
-    @Override
-    public Patient addFirst(Patient patient) {
-        // If list is empty set the given patient as first
-        if(this.isEmpty()) this.first = new Node(patient);
-        else{
-            // Copy first node in memory
-            Node temp = this.first;
-            // Set new patient as first node
-            this.first = new Node(patient);
-            // Set old first as the next of new first node
-            this.first.setNext(temp);
-        }
-        // Increase list size
-        this.size++;
-        // return new first patient
-        return this.first.getPatient();
     }
 
     @Override
@@ -142,38 +179,46 @@ public class PatientList implements INode{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    /**
-     * Get the last node in the list. If the list is empty throw
-     * a ListIsEmptyException.
-     * @return the last node in the list 
-     */
-    private Node getLastNode(){
-        Node last = null;
-        if(this.isEmpty()) throw new ListIsEmptyException();
-        else{
-            Node current = this.first;
-            while(current != null){
-                if(current.getNext() == null) last = current;
-                current = current.getNext();
-            }
-        }
-        return last;
-    }
+
     
-    /**
-     * Get the first node of the list
-     * @return the first node
-     */
-    public Node getFirst() {
-        return first;
-    }
+    
+    
+    
+    
+    
+    
 
     /**
-     * Get the size of the list
-     * @return list size
+     * Add the given patient in the given position in the list.
+     * If position is not available throw a PositionNotAvailableException.
+     * @param patient
+     * @param position
+     * @return the patient added in the list 
      */
-    public int getSize() {
-        return size;
-    }    
+    @Override
+    public Patient addInPosition(Patient patient, int position) {
+        // add the given patient in position 2
+        if(position <= 0 || position > this.size) throw new PositionNotAvailableException();
+        else if(position == 1) this.addFirst(patient);
+        else{
+            Node current = this.first;
+            Node temp = null;
+            int pos = 1;
+            while(current != null){
+                
+            }
+        }        
+        
+        return patient;
+    }
+
+    
+    
+    
+
+    
+
+
+        
     
 }
