@@ -36,7 +36,10 @@ public class HospitalPatientManagementList {
 
         
         patientList.display();
-        System.out.println(patientList.getLast());
+
+        System.out.println("New -----------------\n");
+        patientList.addInPosition(patients[3], 1);
+        patientList.display();
         
         
         

@@ -107,13 +107,50 @@ public class PatientList implements INode{
     }
     
     /**
+     * Add the given patient in the given position in the list.
+     * If position is not available throw a PositionNotAvailableException.
+     * @param patient
+     * @param position
+     * @return the patient added in the list 
+     */
+    @Override
+    public Patient addInPosition(Patient patient, int position) {
+        // add the given patient in position 3
+        Node temp = this.getNode(position);
+        Node inserted = null;
+        
+        if(position == 1) return this.addFirst(patient);
+        else{
+            Node before = this.getNode(position-1);
+            inserted = new Node(patient, temp);
+            before.setNext(inserted);
+            ++size;
+        }
+        return inserted.getPatient();
+    }
+    
+    /**
      * Get the size of the list
      * @return list size
      */
     public int getSize() {
         return size;
     }
-
+    
+    private Node getNode(int position){
+        if(this.isEmpty()) throw new ListIsEmptyException();
+        else if(position <=0 || position > this.size) throw new PositionNotAvailableException();
+        Node current = this.first;
+        Node node = null;
+        int pos = 1;
+        while(current != null){
+            if(position == pos) node = current;
+            ++pos;
+            current = current.getNext();
+        }
+        return node;
+    }
+    
     /**
      * Get the last node in the list. If the list is empty throw
      * a ListIsEmptyException.
@@ -140,16 +177,7 @@ public class PatientList implements INode{
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
@@ -177,48 +205,6 @@ public class PatientList implements INode{
     @Override
     public Patient updatePatientInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-    /**
-     * Add the given patient in the given position in the list.
-     * If position is not available throw a PositionNotAvailableException.
-     * @param patient
-     * @param position
-     * @return the patient added in the list 
-     */
-    @Override
-    public Patient addInPosition(Patient patient, int position) {
-        // add the given patient in position 2
-        if(position <= 0 || position > this.size) throw new PositionNotAvailableException();
-        else if(position == 1) this.addFirst(patient);
-        else{
-            Node current = this.first;
-            Node temp = null;
-            int pos = 1;
-            while(current != null){
-                
-            }
-        }        
-        
-        return patient;
-    }
-
-    
-    
-    
-
-    
-
-
-        
+    }   
     
 }
