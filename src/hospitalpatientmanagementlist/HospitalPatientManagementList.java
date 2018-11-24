@@ -48,7 +48,14 @@ public class HospitalPatientManagementList {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        
+
+        // get patient position, need to check exception
+        try{
+            System.out.println("position: " + 
+                    patientList.getPositionByName("Peter", "Wood"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         
         
