@@ -5,8 +5,7 @@
  */
 package hospitalpatientmanagementlist.libraries;
 
-import hospitalpatientmanagementlist.exceptions.ListIsEmptyException;
-import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
+import hospitalpatientmanagementlist.exceptions.EmptyListException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.models.Patient;
 
@@ -53,7 +52,7 @@ public class PatientList implements INode{
     public void display(){     
         Node current = this.first;
         // Print a message if the list is empty
-        if(this.isEmpty()) System.out.println(new ListIsEmptyException().getMessage());  
+        if(this.isEmpty()) System.out.println(new EmptyListException().getMessage());  
         else {
             int position = 0;
             // Iterate over list and print each patient
@@ -83,7 +82,7 @@ public class PatientList implements INode{
      * @return the first node
      */
     public Patient getFirst() {
-        if(this.isEmpty()) throw new ListIsEmptyException();
+        if(this.isEmpty()) throw new EmptyListException();
         return first.getPatient();
     }
     
@@ -142,14 +141,14 @@ public class PatientList implements INode{
     }
     
     /**
-     * Get the node in the given position. If the list is empty throw
-     * ListIsEmptyException, if the position is not available throw
+     * Get the node in the given position. If the list is empty throw 
+     * EmptyListException, if the position is not available throw 
      * PositionNotAvailableException.
      * @param position
      * @return the node in the given position 
      */
     private Node getNode(int position){
-        if(this.isEmpty()) throw new ListIsEmptyException();
+        if(this.isEmpty()) throw new EmptyListException();
         else if(position <=0 || position > this.size) throw new PositionNotAvailableException();
         Node current = this.first;
         Node node = null;
@@ -164,11 +163,11 @@ public class PatientList implements INode{
     
     /**
      * Get the last node in the list. If the list is empty throw
-     * a ListIsEmptyException.
+     * a EmptyListException.
      * @return the last node in the list 
      */
     private Node getLastNode(){
-        if(this.isEmpty()) throw new ListIsEmptyException();
+        if(this.isEmpty()) throw new EmptyListException();
         Node current = this.first;
         Node last = null;
         while(current != null){
@@ -178,10 +177,42 @@ public class PatientList implements INode{
         return last;
     }
     
+    /**
+     * Remove a patient by PID. If list is empty throw EmptyListException.
+     * @param PID
+     * @return true if removed or false otherwise
+     */
     @Override
     public boolean removePatient(int PID) {
-
+        // If list is empty
+        if(this.isEmpty()) throw new EmptyListException();        
+        // If first node match
+        if(this.first.getPatient().getPID() == PID){
+            return this.removeFirst();
+        }
+        
+        // Start searching from second node
+        Node current = this.first.getNext();
+        // Keep track of previous node
+        Node prev = this.first;
+        while(current != null){
+            // If PID matches set the previous node's next to current's next.
+            if(current.getPatient().getPID() == PID){ 
+                prev.setNext(current.getNext());
+                --size;
+                return true;
+            }
+            prev = current;
+            current = current.getNext();
+        }
         return false;
+    }
+    
+    private boolean removeFirst(){
+        if(this.isEmpty()) throw new EmptyListException();
+        this.first = this.first.getNext();
+        --size;
+        return true;
     }
     
 

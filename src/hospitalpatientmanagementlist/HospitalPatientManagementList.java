@@ -29,12 +29,19 @@ public class HospitalPatientManagementList {
         }
 
         patientList.addFirst(patients[0]);
-        //patientList.addLast(patients[1]);
-        //patientList.addLast(patients[2]);
-//        patientList.addLast(patients[3]);
+        patientList.addLast(patients[1]);
+        patientList.addLast(patients[2]);
+        patientList.addLast(patients[3]);
+        patientList.addLast(patients[4]);
+        patientList.addLast(patients[5]);
+
         
+        try{
+            System.out.println(patientList.removePatient(6)); 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
-        System.out.println(patientList.removePatient(1)); 
         
         
         

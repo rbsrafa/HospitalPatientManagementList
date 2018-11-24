@@ -9,9 +9,9 @@ package hospitalpatientmanagementlist.exceptions;
  *
  * @author rbsrafa
  */
-public class ListIsEmptyException extends RuntimeException{
+public class EmptyListException extends RuntimeException{
 
-    public ListIsEmptyException() {
+    public EmptyListException() {
         super("Patient list is empty");
     }
     
