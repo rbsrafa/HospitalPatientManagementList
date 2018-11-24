@@ -268,25 +268,46 @@ public class PatientList implements INode{
         throw new PatientNotFoundException(-1);
     }
     
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-
-
-
-    
-
+    /**
+     * Get the actual Patient position based in the first and last name.
+     * If list is empty throw EmptyListException.
+     * If name it is not in the list throw PatientNotFoundException.
+     * @param PID
+     * @return the patient position when found otherwise returns -1
+     */
     @Override
     public int getPositionByPID(int PID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Start searching from first node
+        Node current = this.first;
+        // Start in the first position
+        int position = 1;
+        while(current != null){
+            // if current Patient name matches with the PID returns the position
+            if(current.getPatient().getPID() == PID) {
+                return position;
+            }
+            // increase position counter and gets next Patient
+            position++;
+            current = current.getNext();
+        }
+        // Error returns PID not found
+        throw new PatientNotFoundException(PID);
     }
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    
+
+    
 
     @Override
     public Patient updatePatientInfo() {

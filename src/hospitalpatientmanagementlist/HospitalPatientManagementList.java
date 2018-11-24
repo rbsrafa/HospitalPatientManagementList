@@ -44,7 +44,7 @@ public class HospitalPatientManagementList {
         
         // remove last n patients of the list
         try{
-            System.out.println(patientList.removeLastPatients(5));
+            System.out.println(patientList.removeLastPatients(2));
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -57,6 +57,13 @@ public class HospitalPatientManagementList {
             System.out.println(e.getMessage());
         }
         
+        // get patient position by PID
+        try{
+            System.out.println("position: " + 
+                    patientList.getPositionByPID(2));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         
         
