@@ -35,13 +35,19 @@ public class HospitalPatientManagementList {
         patientList.addLast(patients[4]);
         patientList.addLast(patients[5]);
 
-        
+        // remove patients by PID
         try{
             System.out.println(patientList.removePatient(6)); 
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
         
+        // remove last n patients of the list
+        try{
+            System.out.println(patientList.removeLastPatients(5));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         
         
