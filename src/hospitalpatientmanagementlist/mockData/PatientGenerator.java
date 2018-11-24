@@ -13,8 +13,15 @@ import hospitalpatientmanagementlist.models.Patient;
  */
 public class PatientGenerator {
     
+    /**
+     * Create a new Patient generator
+     */
     public PatientGenerator(){}
     
+    /**
+     * Generate six mock patients for testing purposes
+     * @return an array of patients
+     */
     public Patient[] generatePatients(){        
         String[] ppsNumbers = {"12345678W", "87654321W", "56974268W", "71320158W", "52671087W", "54036974W"};
         String[] firstNames = {"John", "Louis", "Peter", "Sara", "Lucy", "Mary"};
