@@ -23,6 +23,7 @@ public class PatientList implements INode{
      * Create a empty patient list
      */
     public PatientList(){
+        this.first = null;
         this.size = 0;
     }
     
@@ -215,6 +216,27 @@ public class PatientList implements INode{
         return true;
     }
     
+    /**
+     * Remove n patients from the end of the list. 
+     * If list is empty throw EmptyListException.
+     * @param range
+     * @return true if removed or false otherwise
+     */
+    @Override
+    public boolean removeLastPatients(int range) {
+        int deletionPoint = this.getSize() - range;
+        if(deletionPoint < 0) throw new PositionNotAvailableException();
+        else if (deletionPoint == 0) {
+            this.first = null;
+            this.size -= range;
+            return true;}
+        else {
+            this.getNode(deletionPoint).setNext(null);
+            this.size -= range;
+            return true;
+        }   
+    }
+    
 
     
     
@@ -237,11 +259,6 @@ public class PatientList implements INode{
 
     @Override
     public int getPositionByPID(int PID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean removeLastPatients(int range) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
