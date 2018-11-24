@@ -7,6 +7,7 @@ package hospitalpatientmanagementlist.libraries;
 
 import hospitalpatientmanagementlist.exceptions.EmptyListException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
+import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
 import hospitalpatientmanagementlist.models.Patient;
 
 /**
@@ -224,6 +225,7 @@ public class PatientList implements INode{
      */
     @Override
     public boolean removeLastPatients(int range) {
+        // Define the position where the deletion happens
         int deletionPoint = this.getSize() - range;
         if(deletionPoint < 0) throw new PositionNotAvailableException();
         else if (deletionPoint == 0) {
@@ -236,26 +238,50 @@ public class PatientList implements INode{
             return true;
         }   
     }
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-
+    /**
+     * Get the actual Patient position based in the first and last name.
+     * If list is empty throw EmptyListException.
+     * If name it is not in the list throw PatientNotFoundException.
+     * @param first
+     * @param last
+     * @return the patient position when found otherwise returns -1
+     */
     @Override
     public int getPositionByName(String first, String last) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Start searching from first node
+        Node current = this.first;
+        // Start in the first position
+        int position = 1;
+        while(current != null){
+            // if current Patient name matches with the one passed in the argument
+            // returns the position
+            if(current.getPatient().getFirstName() == first 
+                    && current.getPatient().getLastName() == last) {
+                return position;
+            }
+            // increase position counter and gets next Patient
+            position++;
+            current = current.getNext();
+        }
+        // Error returns position -1
+        throw new PatientNotFoundException(-1);
     }
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    
 
     @Override
     public int getPositionByPID(int PID) {
