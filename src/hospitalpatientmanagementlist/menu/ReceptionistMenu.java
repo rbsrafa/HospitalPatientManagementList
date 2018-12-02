@@ -53,8 +53,11 @@ public class ReceptionistMenu {
                 break;
             case 7: System.out.println("7");
                 break;
-            case 8: System.exit(0);
+            case 8: System.out.println("8");
                 break;
+            case 9: System.out.println("9");
+                break;
+            case 10: System.exit(0);
         }
     }
     
@@ -77,6 +80,7 @@ public class ReceptionistMenu {
             "Add patient to specific position",
             "Remove patient from list",
             "Remove last 'n' patients",
+            "Exit program"
         };
         this.options = options;
     }
