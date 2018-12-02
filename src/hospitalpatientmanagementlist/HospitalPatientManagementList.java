@@ -7,6 +7,7 @@ package hospitalpatientmanagementlist;
 
 import hospitalpatientmanagementlist.libraries.Node;
 import hospitalpatientmanagementlist.libraries.PatientList;
+import hospitalpatientmanagementlist.menu.ReceptionistMenu;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
 import hospitalpatientmanagementlist.models.Patient;
 
@@ -20,55 +21,60 @@ public class HospitalPatientManagementList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PatientList patientList = new PatientList();
-        Patient[] patients = new PatientGenerator().generatePatients();
         
-        Node[] nodes = new Node[6];
-        for(int i = 0; i < patients.length; i++){
-            nodes[i] = new Node(patients[i]);
-        }
+        ReceptionistMenu menu = new ReceptionistMenu();
 
-        patientList.addFirst(patients[0]);
-        patientList.addLast(patients[1]);
-        patientList.addLast(patients[2]);
-        patientList.addLast(patients[3]);
-        patientList.addLast(patients[4]);
-        patientList.addLast(patients[5]);
+        
+        
+//        PatientList patientList = new PatientList();
+//        Patient[] patients = new PatientGenerator().generatePatients();
+//        
+//        Node[] nodes = new Node[6];
+//        for(int i = 0; i < patients.length; i++){
+//            nodes[i] = new Node(patients[i]);
+//        }
+//
+//        patientList.addFirst(patients[0]);
+//        patientList.addLast(patients[1]);
+//        patientList.addLast(patients[2]);
+//        patientList.addLast(patients[3]);
+//        patientList.addLast(patients[4]);
+//        patientList.addLast(patients[5]);
+//
+//        // remove patients by PID
+//        try{
+//            System.out.println(patientList.removePatient(6)); 
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//        
+//        // remove last n patients of the list
+//        try{
+//            System.out.println(patientList.removeLastPatients(2));
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//
+//        // get patient position, need to check exception
+//        try{
+//            System.out.println("position: " + 
+//                    patientList.getPositionByName("Peter", "Wood"));
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//        
+//        // get patient position by PID
+//        try{
+//            System.out.println("position: " + 
+//                    patientList.getPositionByPID(2));
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//        
+//        patientList.display();
+//        System.out.println(patientList.getSize());
 
-        // remove patients by PID
-        try{
-            System.out.println(patientList.removePatient(6)); 
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-        // remove last n patients of the list
-        try{
-            System.out.println(patientList.removeLastPatients(2));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
 
-        // get patient position, need to check exception
-        try{
-            System.out.println("position: " + 
-                    patientList.getPositionByName("Peter", "Wood"));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-        // get patient position by PID
-        try{
-            System.out.println("position: " + 
-                    patientList.getPositionByPID(2));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-        
-        
-        patientList.display();
-        System.out.println(patientList.getSize());
     }
     
 }

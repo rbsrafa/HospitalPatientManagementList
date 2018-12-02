@@ -269,7 +269,7 @@ public class PatientList implements INode{
     }
     
     /**
-     * Get the actual Patient position based in the first and last name.
+     * Get the actual Patient position based in the PID.
      * If list is empty throw EmptyListException.
      * If name it is not in the list throw PatientNotFoundException.
      * @param PID
@@ -282,7 +282,7 @@ public class PatientList implements INode{
         // Start in the first position
         int position = 1;
         while(current != null){
-            // if current Patient name matches with the PID returns the position
+            // if current Patient PID matches with the PID returns the position
             if(current.getPatient().getPID() == PID) {
                 return position;
             }
