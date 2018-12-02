@@ -5,6 +5,8 @@
  */
 package hospitalpatientmanagementlist.menu;
 
+import hospitalpatientmanagementlist.libraries.PatientList;
+import hospitalpatientmanagementlist.mockData.PatientGenerator;
 import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
 
@@ -19,8 +21,10 @@ public class ReceptionistMenu {
     private boolean exit;
     private Scanner in;
     private DataValidation validate;
+    private PatientList patientList;
     
     public ReceptionistMenu(){
+        this.patientList = new PatientGenerator().generateList();
         this.validate = new DataValidation();
         this.in = new Scanner(System.in);
         this.title = "Reception Menu";
@@ -37,7 +41,9 @@ public class ReceptionistMenu {
                 break;
             case 2: System.out.println("2");
                 break;
-            case 3: System.out.println("3");
+            case 3: 
+                System.out.println("\nPatient List:\n");
+                this.patientList.display();
                 break;
             case 4: System.out.println("4");
                 break;
@@ -64,6 +70,7 @@ public class ReceptionistMenu {
         String[] options = {
             "Register new patient",
             "Update patient details",
+            "Show patient list",
             "Get patient position",
             "Add patient to first position",
             "Add patient to last position",

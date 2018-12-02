@@ -5,6 +5,8 @@
  */
 package hospitalpatientmanagementlist.mockData;
 
+import hospitalpatientmanagementlist.libraries.Node;
+import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.models.Patient;
 
 /**
@@ -36,6 +38,24 @@ public class PatientGenerator {
         }
         
         return patients;
+    }
+    
+    public PatientList generateList(){
+        PatientList patientList = new PatientList();
+        Patient[] patients = this.generatePatients();
+        
+        Node[] nodes = new Node[6];
+        for(int i = 0; i < patients.length; i++){
+            nodes[i] = new Node(patients[i]);
+        }
+
+        patientList.addFirst(patients[0]);
+        patientList.addLast(patients[1]);
+        patientList.addLast(patients[2]);
+        patientList.addLast(patients[3]);
+        patientList.addLast(patients[4]);
+        patientList.addLast(patients[5]);
+        return patientList;
     }
     
 }

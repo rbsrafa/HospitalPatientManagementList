@@ -5,11 +5,8 @@
  */
 package hospitalpatientmanagementlist;
 
-import hospitalpatientmanagementlist.libraries.Node;
-import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.menu.ReceptionistMenu;
-import hospitalpatientmanagementlist.mockData.PatientGenerator;
-import hospitalpatientmanagementlist.models.Patient;
+
 
 /**
  *
@@ -26,20 +23,7 @@ public class HospitalPatientManagementList {
 
         
         
-//        PatientList patientList = new PatientList();
-//        Patient[] patients = new PatientGenerator().generatePatients();
-//        
-//        Node[] nodes = new Node[6];
-//        for(int i = 0; i < patients.length; i++){
-//            nodes[i] = new Node(patients[i]);
-//        }
-//
-//        patientList.addFirst(patients[0]);
-//        patientList.addLast(patients[1]);
-//        patientList.addLast(patients[2]);
-//        patientList.addLast(patients[3]);
-//        patientList.addLast(patients[4]);
-//        patientList.addLast(patients[5]);
+
 //
 //        // remove patients by PID
 //        try{
