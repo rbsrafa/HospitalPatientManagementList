@@ -7,6 +7,7 @@ package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
+import hospitalpatientmanagementlist.models.Patient;
 import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
 
@@ -49,6 +50,7 @@ public class ReceptionistMenu {
                 this.getPatientByPID();
                 break;
             case 5: System.out.println("5");
+                this.addFirst();
                 break;
             case 6: System.out.println("6");
                 break;
@@ -106,6 +108,26 @@ public class ReceptionistMenu {
             "                    |_|                      "
         );
     }
+
+    /**
+     * Get information from user to create a new Patient
+     */
+    public Patient createNewPatient() {
+        System.out.println("\nPlease inform patient PPS:");
+        String pps = this.in.next();
+        System.out.println("\nPlease inform patient First Name:");
+        String firstName = this.in.next();
+        System.out.println("\nPlease inform patient Last Name:");
+        String lastName = this.in.next();
+        System.out.println("\nPlease inform patient Mobile Number:");
+        String mobileNumber = this.in.next();
+        System.out.println("\nPlease inform patient email:");
+        String email = this.in.next();
+        System.out.println("\nPlease inform patient city:");
+        String city = this.in.next();
+        return new Patient(pps, firstName, lastName, mobileNumber, email, city);
+        //System.out.println("pps "+pps+"\nf "+firstName+"\nl "+lastName+"\nn "+mobileNumber);
+    }
     
     public void displayMenu(){
         System.out.println("");
@@ -117,12 +139,20 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Asks user for a valid PID and fetch Patient position on the Patient List
+     */
     public void getPatientByPID() {
         System.out.println("\nPlease inform patient PID:");
         int pidToFetch = this.validate.checkForInt(in);
         int patientPosition = this.patientList.getPositionByPID(pidToFetch);
         System.out.println("Patient current position is: " + patientPosition);
     }
-
     
+    /**
+     * Add a new Patient at the first position of the Patient List
+     */
+    public void addFirst() {
+        this.patientList.addFirst(this.createNewPatient());
+    }
 }
