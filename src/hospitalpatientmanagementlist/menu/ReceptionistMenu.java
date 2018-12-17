@@ -46,6 +46,7 @@ public class ReceptionistMenu {
                 this.patientList.display();
                 break;
             case 4: System.out.println("4");
+                this.getPatientByPID();
                 break;
             case 5: System.out.println("5");
                 break;
@@ -114,6 +115,13 @@ public class ReceptionistMenu {
         for(int i = 0; i < this.options.length; i++){
             System.out.println((i+1) + " - " + this.options[i]);
         }
+    }
+    
+    public void getPatientByPID() {
+        System.out.println("\nPlease inform patient PID:");
+        int pidToFetch = this.validate.checkForInt(in);
+        int patientPosition = this.patientList.getPositionByPID(pidToFetch);
+        System.out.println("Patient current position is: " + patientPosition);
     }
 
     
