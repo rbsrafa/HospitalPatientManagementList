@@ -46,15 +46,16 @@ public class ReceptionistMenu {
                 System.out.println("\nPatient List:\n");
                 this.patientList.display();
                 break;
-            case 4: System.out.println("4");
+            case 4:
                 this.getPatientByPID();
                 break;
-            case 5: System.out.println("5");
+            case 5:
                 this.addFirst();
                 break;
             case 6: System.out.println("6");
                 break;
-            case 7: System.out.println("7");
+            case 7: 
+            this.addInPosition();
                 break;
             case 8: System.out.println("8");
                 break;
@@ -154,5 +155,20 @@ public class ReceptionistMenu {
      */
     public void addFirst() {
         this.patientList.addFirst(this.createNewPatient());
+    }
+    
+    /**
+     * Add a new Patient at specific position on the Patient List
+     */
+    public void addInPosition() {
+        System.out.println("\nPlease inform position to add patient:");
+        int position = this.validate.checkPosition(in, this.patientList.getSize());
+        
+        if(position == -1) {
+            System.out.println("\n*** Invalid list position. Please try again ***");
+            this.addInPosition();
+        }
+        
+        this.patientList.addInPosition(this.createNewPatient(), position);
     }
 }
