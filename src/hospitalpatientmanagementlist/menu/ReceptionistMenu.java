@@ -38,9 +38,11 @@ public class ReceptionistMenu {
         System.out.println("\nPlease select an option:");
         int option = this.validate.checkForInt(in);
         switch(option){
-            case 1: System.out.println("1");
+            case 1: 
+                System.out.println("1");
                 break;
-            case 2: System.out.println("2");
+            case 2: 
+                System.out.println("2");
                 break;
             case 3: 
                 System.out.println("\nPatient List:\n");
@@ -52,14 +54,17 @@ public class ReceptionistMenu {
             case 5:
                 this.addFirst();
                 break;
-            case 6: System.out.println("6");
+            case 6: 
+                System.out.println("6");
                 break;
             case 7: 
-            this.addInPosition();
+                this.addInPosition();
                 break;
-            case 8: System.out.println("8");
+            case 8: 
+                System.out.println("8");
                 break;
-            case 9: System.out.println("9");
+            case 9: 
+                System.out.println("9");
                 break;
             case 10: System.exit(0);
         }
