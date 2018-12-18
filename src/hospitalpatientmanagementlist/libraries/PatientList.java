@@ -293,25 +293,11 @@ public class PatientList implements INode{
         // Error returns PID not found
         throw new PatientNotFoundException(PID);
     }
-    
-    
-    
-    
-    
-
-    
-    
-    
-
-
-
-    
-
-    
-
+ 
     @Override
-    public Patient updatePatientInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Patient updatePatientInfo(int PID) {
+        Patient p = this.getNode(PID).getPatient();
+        return p;
     }   
     
 }

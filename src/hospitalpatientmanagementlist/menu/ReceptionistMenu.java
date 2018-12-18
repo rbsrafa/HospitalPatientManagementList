@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.libraries.PatientList;
@@ -10,7 +5,6 @@ import hospitalpatientmanagementlist.mockData.PatientGenerator;
 import hospitalpatientmanagementlist.models.Patient;
 import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
-
 
 /**
  *
@@ -43,7 +37,7 @@ public class ReceptionistMenu {
                 this.patientList.display();
                 break;
             case 2: 
-                System.out.println("update patient");
+                System.out.println("bla"); 
                 break;
             case 3:
                 this.getPatientByPID();
@@ -87,6 +81,10 @@ public class ReceptionistMenu {
             "Exit program"
         };
         this.options = options;
+    }
+    
+    private void updatePatientDetails(){
+
     }
 
     /**
@@ -133,7 +131,7 @@ public class ReceptionistMenu {
      * Add a new Patient at the first position of the Patient List
      */
     public void addFirst() {
-        this.patientList.addFirst(this.createNewPatient());
+        System.out.println(this.patientList.addFirst(this.createNewPatient())); 
     }
     
     /**

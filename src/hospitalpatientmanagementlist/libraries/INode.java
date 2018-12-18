@@ -19,5 +19,5 @@ public interface INode {
     public boolean removePatient(int PID);
     public Patient addFirst(Patient patient);
     public boolean removeLastPatients(int range);
-    public Patient updatePatientInfo();
+    public Patient updatePatientInfo(int PID);
 }
