@@ -12,7 +12,7 @@ package hospitalpatientmanagementlist.models;
 public class Patient {
     private static int counter = 0;
     private final int PID;
-    private final String ppsNumber;
+    private String ppsNumber;
     private String firstName;
     private String lastName;
     private String mobileNumber;
@@ -143,4 +143,11 @@ public class Patient {
         return ppsNumber;
     }
     
+    /**
+     * Set the PPS number
+     * @param pps 
+     */
+    public void setPpsNumber(String pps){
+        this.ppsNumber = pps;
+    }
 }

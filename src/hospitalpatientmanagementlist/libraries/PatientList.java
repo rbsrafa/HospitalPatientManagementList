@@ -295,9 +295,12 @@ public class PatientList implements INode{
     }
  
     @Override
-    public Patient updatePatientInfo(int PID) {
-        Patient p = this.getNode(PID).getPatient();
+    public Patient getPatient(int PID) {
+        int position = this.getPositionByPID(PID);
+        Patient p = this.getNode(position).getPatient();
         return p;
     }   
+    
+
     
 }

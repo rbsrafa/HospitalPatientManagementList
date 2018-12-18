@@ -17,6 +17,7 @@ public class ReceptionistMenu {
     private Scanner in;
     private DataValidation validate;
     private PatientList patientList;
+    private boolean updating = false;
     
     public ReceptionistMenu(){
         this.patientList = new PatientGenerator().generateList();
@@ -37,7 +38,7 @@ public class ReceptionistMenu {
                 this.patientList.display();
                 break;
             case 2: 
-                System.out.println("bla"); 
+                this.updatePatientDetails();
                 break;
             case 3:
                 this.getPatientByPID();
@@ -84,7 +85,72 @@ public class ReceptionistMenu {
     }
     
     private void updatePatientDetails(){
-
+        this.updating = true;
+        Patient toUpdate;
+        
+        System.out.println("Please type the patient PID");
+        toUpdate = this.patientList.getPatient(this.validate.checkForInt(in));
+        System.out.println("Patient to update:\n");
+        System.out.println(toUpdate);
+        System.out.println("");
+        this.patientUpdateQuestions();
+        
+        while(updating){
+            this.patientUpdateProperties(
+                    this.selectPropertyToUpdate(), 
+                    toUpdate
+            );
+        }
+    }
+    
+    private int selectPropertyToUpdate(){
+        int option = this.validate.checkForInt(in);
+            if(option < 1 || option > 7){
+                System.out.println("\n*** Option not available, please try again ***\n");
+            }
+        return option;
+    }
+    
+    private void patientUpdateProperties(int option, Patient toUpdate){
+        this.patientUpdateQuestions();
+        if(option == 1){
+            System.out.println("Please type the new PPS number");
+            toUpdate.setPpsNumber(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option == 2){
+            System.out.println("Please type the first name");
+            toUpdate.setFirstName(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option == 3){
+            System.out.println("Please type the last name");
+            toUpdate.setLastName(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option == 4){
+            System.out.println("Please type the mobile number");
+            toUpdate.setMobileNumber(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option == 5){
+            System.out.println("Please type the email");
+            toUpdate.setEmail(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option ==6){
+            System.out.println("Please type the city");
+            toUpdate.setCity(this.validate.checkForString(in));
+            this.patientUpdateQuestions();
+        }else if(option == 7){
+            updating = false;
+        }
+    }
+    
+    private void patientUpdateQuestions(){
+        System.out.println("What you would like to update?\n"
+                + "1 - PPS Number\n"
+                + "2 - First Name\n"
+                + "3 - Last Name\n"
+                + "4 - Mobile Number\n"
+                + "5 - Email\n"
+                + "6 - City\n"
+                + "7 - Done\n");
     }
 
     /**
