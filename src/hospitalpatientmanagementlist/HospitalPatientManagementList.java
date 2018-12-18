@@ -18,47 +18,25 @@ public class HospitalPatientManagementList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        displayWelcome();
         ReceptionistMenu menu = new ReceptionistMenu();
-
-        
-        
-
-//
-//        // remove patients by PID
-//        try{
-//            System.out.println(patientList.removePatient(6)); 
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        
-//        // remove last n patients of the list
-//        try{
-//            System.out.println(patientList.removeLastPatients(2));
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//        // get patient position, need to check exception
-//        try{
-//            System.out.println("position: " + 
-//                    patientList.getPositionByName("Peter", "Wood"));
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        
-//        // get patient position by PID
-//        try{
-//            System.out.println("position: " + 
-//                    patientList.getPositionByPID(2));
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        
-//        patientList.display();
-//        System.out.println(patientList.getSize());
-
-
+    }
+    
+    public static void displayWelcome(){
+        System.out.println("  _____         _             _ \n" +
+            "  \\_   \\  __ _ | |__    __ _ | |\n" +
+            "   / /\\/ / _` || '_ \\  / _` || |\n" +
+            "/\\/ /_  | (_| || |_) || (_| || |\n" +
+            "\\____/   \\__, ||_.__/  \\__,_||_|\n" +
+            "            |_|                 "
+        );
+        System.out.println("                            _  _           _ \n" +
+            "  /\\  /\\  ___   ___  _ __  (_)| |_   __ _ | |\n" +
+            " / /_/ / / _ \\ / __|| '_ \\ | || __| / _` || |\n" +
+            "/ __  / | (_) |\\__ \\| |_) || || |_ | (_| || |\n" +
+            "\\/ /_/   \\___/ |___/| .__/ |_| \\__| \\__,_||_|\n" +
+            "                    |_|                      "
+        );
     }
     
 }

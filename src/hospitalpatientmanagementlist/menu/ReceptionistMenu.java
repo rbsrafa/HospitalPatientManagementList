@@ -39,39 +39,35 @@ public class ReceptionistMenu {
         int option = this.validate.checkForInt(in);
         switch(option){
             case 1: 
-                System.out.println("1");
-                break;
-            case 2: 
-                System.out.println("2");
-                break;
-            case 3: 
                 System.out.println("\nPatient List:\n");
                 this.patientList.display();
                 break;
-            case 4:
+            case 2: 
+                System.out.println("update patient");
+                break;
+            case 3:
                 this.getPatientByPID();
                 break;
-            case 5:
+            case 4:
                 this.addFirst();
                 break;
-            case 6: 
+            case 5: 
                 System.out.println("6");
                 break;
-            case 7: 
+            case 6: 
                 this.addInPosition();
                 break;
-            case 8: 
+            case 7: 
                 System.out.println("8");
                 break;
-            case 9: 
+            case 8: 
                 System.out.println("9");
                 break;
-            case 10: System.exit(0);
+            case 9: System.exit(0);
         }
     }
     
     public void startMenu(){
-        this.displayWelcome();
         while(!this.exit){
             this.displayMenu();
             this.optionSelector();
@@ -80,9 +76,8 @@ public class ReceptionistMenu {
     
     public void setOptions(){
         String[] options = {
-            "Register new patient",
-            "Update patient details",
             "Show patient list",
+            "Update patient details",
             "Get patient position",
             "Add patient to first position",
             "Add patient to last position",
@@ -92,27 +87,6 @@ public class ReceptionistMenu {
             "Exit program"
         };
         this.options = options;
-    }
-    
-    public int chooseOption(){
-        return 1;
-    }
-    
-    public void displayWelcome(){
-        System.out.println("  _____         _             _ \n" +
-            "  \\_   \\  __ _ | |__    __ _ | |\n" +
-            "   / /\\/ / _` || '_ \\  / _` || |\n" +
-            "/\\/ /_  | (_| || |_) || (_| || |\n" +
-            "\\____/   \\__, ||_.__/  \\__,_||_|\n" +
-            "            |_|                 "
-        );
-        System.out.println("                            _  _           _ \n" +
-            "  /\\  /\\  ___   ___  _ __  (_)| |_   __ _ | |\n" +
-            " / /_/ / / _ \\ / __|| '_ \\ | || __| / _` || |\n" +
-            "/ __  / | (_) |\\__ \\| |_) || || |_ | (_| || |\n" +
-            "\\/ /_/   \\___/ |___/| .__/ |_| \\__| \\__,_||_|\n" +
-            "                    |_|                      "
-        );
     }
 
     /**
