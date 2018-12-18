@@ -13,7 +13,7 @@ public class PositionNotAvailableException extends RuntimeException{
 
     public PositionNotAvailableException() {
         super("The given position is not available in the list. "
-                + "The position should be equal "
+                + "\nThe position should be equal "
                 + "or bigger than 1 and less or equal the list size.");
     }
     
