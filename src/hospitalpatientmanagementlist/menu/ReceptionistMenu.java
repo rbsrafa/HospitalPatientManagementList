@@ -7,6 +7,7 @@ package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
+import hospitalpatientmanagementlist.models.Patient;
 import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
 
@@ -45,13 +46,16 @@ public class ReceptionistMenu {
                 System.out.println("\nPatient List:\n");
                 this.patientList.display();
                 break;
-            case 4: System.out.println("4");
+            case 4:
+                this.getPatientByPID();
                 break;
-            case 5: System.out.println("5");
+            case 5:
+                this.addFirst();
                 break;
             case 6: System.out.println("6");
                 break;
-            case 7: System.out.println("7");
+            case 7: 
+            this.addInPosition();
                 break;
             case 8: System.out.println("8");
                 break;
@@ -105,6 +109,26 @@ public class ReceptionistMenu {
             "                    |_|                      "
         );
     }
+
+    /**
+     * Get information from user to create a new Patient
+     */
+    public Patient createNewPatient() {
+        System.out.println("\nPlease inform patient PPS:");
+        String pps = this.in.next();
+        System.out.println("\nPlease inform patient First Name:");
+        String firstName = this.in.next();
+        System.out.println("\nPlease inform patient Last Name:");
+        String lastName = this.in.next();
+        System.out.println("\nPlease inform patient Mobile Number:");
+        String mobileNumber = this.in.next();
+        System.out.println("\nPlease inform patient email:");
+        String email = this.in.next();
+        System.out.println("\nPlease inform patient city:");
+        String city = this.in.next();
+        return new Patient(pps, firstName, lastName, mobileNumber, email, city);
+        //System.out.println("pps "+pps+"\nf "+firstName+"\nl "+lastName+"\nn "+mobileNumber);
+    }
     
     public void displayMenu(){
         System.out.println("");
@@ -115,6 +139,36 @@ public class ReceptionistMenu {
             System.out.println((i+1) + " - " + this.options[i]);
         }
     }
-
     
+    /**
+     * Asks user for a valid PID and fetch Patient position on the Patient List
+     */
+    public void getPatientByPID() {
+        System.out.println("\nPlease inform patient PID:");
+        int pidToFetch = this.validate.checkForInt(in);
+        int patientPosition = this.patientList.getPositionByPID(pidToFetch);
+        System.out.println("Patient current position is: " + patientPosition);
+    }
+    
+    /**
+     * Add a new Patient at the first position of the Patient List
+     */
+    public void addFirst() {
+        this.patientList.addFirst(this.createNewPatient());
+    }
+    
+    /**
+     * Add a new Patient at specific position on the Patient List
+     */
+    public void addInPosition() {
+        System.out.println("\nPlease inform position to add patient:");
+        int position = this.validate.checkPosition(in, this.patientList.getSize());
+        
+        if(position == -1) {
+            System.out.println("\n*** Invalid list position. Please try again ***");
+            this.addInPosition();
+        }
+        
+        this.patientList.addInPosition(this.createNewPatient(), position);
+    }
 }

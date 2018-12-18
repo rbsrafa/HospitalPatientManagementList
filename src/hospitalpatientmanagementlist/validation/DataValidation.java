@@ -40,6 +40,17 @@ public class DataValidation {
     }
     
     /**
+     * This method checks the user input against the list size.
+     * @param input (Scanner)
+     * @return A validated int
+     */
+    public int checkPosition(Scanner input, int listSize){
+        int validInt = this.checkForInt(input);
+        if(validInt > listSize){return -1;}
+        return validInt;
+    }
+    
+    /**
      * This method returns a whole line input by the user.
      * @param input (Scanner)
      * @return The input String
