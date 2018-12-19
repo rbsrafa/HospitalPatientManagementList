@@ -1,6 +1,7 @@
 package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.exceptions.EmptyListException;
+import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
@@ -225,8 +226,13 @@ public class ReceptionistMenu {
     public void getPatientByPID() {
         System.out.println("\nPlease inform patient PID:");
         int pidToFetch = this.validate.checkForInt(in);
-        int patientPosition = this.patientList.getPositionByPID(pidToFetch);
-        System.out.println("Patient current position is: " + patientPosition);
+        try{
+            int patientPosition = this.patientList.getPositionByPID(pidToFetch);
+            System.out.println("Patient current position is: " + patientPosition);
+        }catch(PatientNotFoundException e){
+            System.out.println(e.getMessage());
+            this.getPatientByPID();
+        }
     }
     
     /**
