@@ -1,5 +1,7 @@
 package hospitalpatientmanagementlist.menu;
 
+import hospitalpatientmanagementlist.exceptions.EmptyListException;
+import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
 import hospitalpatientmanagementlist.models.Patient;
@@ -56,7 +58,7 @@ public class ReceptionistMenu {
                 this.removePatient();
                 break;
             case 8: 
-                System.out.println("9");
+                this.removeLastPatients();
                 break;
             case 9: System.exit(0);
         }
@@ -82,6 +84,26 @@ public class ReceptionistMenu {
             "Exit program"
         };
         this.options = options;
+    }
+    
+    private void removeLastPatients(){
+        System.out.println("Please type the number of patients to remove");
+        int number = this.validate.checkForInt(in);
+        
+        try{
+            if(number > this.patientList.getSize()){
+                System.out.println("\n*** Sorry the typed amount is bigger\n"
+                        + "than the list size ***\n");
+                removeLastPatients();
+            }
+            this.patientList.removeLastPatients(number);
+        }catch(EmptyListException e1){
+            System.out.println("\n" + e1.getMessage() + "\n");
+            removeLastPatients();
+        }catch(PositionNotAvailableException e2){
+            System.out.println("\n" + e2.getMessage() + "\n");
+            removeLastPatients();
+        }
     }
     
     private void removePatient(){
