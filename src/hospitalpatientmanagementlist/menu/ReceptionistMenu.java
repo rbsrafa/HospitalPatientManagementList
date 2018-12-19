@@ -53,7 +53,7 @@ public class ReceptionistMenu {
                 this.addInPosition();
                 break;
             case 7: 
-                System.out.println("8");
+                this.removePatient();
                 break;
             case 8: 
                 System.out.println("9");
@@ -82,6 +82,16 @@ public class ReceptionistMenu {
             "Exit program"
         };
         this.options = options;
+    }
+    
+    private void removePatient(){
+        System.out.println("Please type the patient PID");
+        int PID = this.validate.checkForInt(in);
+        if(PID > this.patientList.getSize() || PID < 1){
+            System.out.println("\n*** Sorry this patient does not exist ***\n");
+            this.removePatient();
+        }
+        this.patientList.removePatient(PID);
     }
     
     private void updatePatientDetails(){
