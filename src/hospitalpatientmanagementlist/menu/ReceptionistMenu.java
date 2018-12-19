@@ -49,7 +49,7 @@ public class ReceptionistMenu {
                 this.addFirst();
                 break;
             case 5: 
-                System.out.println("6");
+                this.addToLastPosition();
                 break;
             case 6: 
                 this.addInPosition();
@@ -84,6 +84,10 @@ public class ReceptionistMenu {
             "Exit program"
         };
         this.options = options;
+    }
+    
+    private void addToLastPosition(){
+        System.out.println(this.patientList.addLast(this.createNewPatient()));
     }
     
     private void removeLastPatients(){
