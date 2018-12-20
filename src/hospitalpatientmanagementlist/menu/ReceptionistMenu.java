@@ -1,6 +1,7 @@
 package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.exceptions.EmptyListException;
+import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
@@ -65,10 +66,28 @@ public class ReceptionistMenu {
     }
     
     public void startMenu(){
+        this.displayWelcome();
         while(!this.exit){
             this.displayMenu();
             this.optionSelector();
         }
+    }
+    
+    public void displayWelcome(){
+        System.out.println("  _____         _             _ \n" +
+            "  \\_   \\  __ _ | |__    __ _ | |\n" +
+            "   / /\\/ / _` || '_ \\  / _` || |\n" +
+            "/\\/ /_  | (_| || |_) || (_| || |\n" +
+            "\\____/   \\__, ||_.__/  \\__,_||_|\n" +
+            "            |_|                 "
+        );
+        System.out.println("                            _  _           _ \n" +
+            "  /\\  /\\  ___   ___  _ __  (_)| |_   __ _ | |\n" +
+            " / /_/ / / _ \\ / __|| '_ \\ | || __| / _` || |\n" +
+            "/ __  / | (_) |\\__ \\| |_) || || |_ | (_| || |\n" +
+            "\\/ /_/   \\___/ |___/| .__/ |_| \\__| \\__,_||_|\n" +
+            "                    |_|                      "
+        );
     }
     
     public void setOptions(){
@@ -225,8 +244,13 @@ public class ReceptionistMenu {
     public void getPatientByPID() {
         System.out.println("\nPlease inform patient PID:");
         int pidToFetch = this.validate.checkForInt(in);
-        int patientPosition = this.patientList.getPositionByPID(pidToFetch);
-        System.out.println("Patient current position is: " + patientPosition);
+        try{
+            int patientPosition = this.patientList.getPositionByPID(pidToFetch);
+            System.out.println("Patient current position is: " + patientPosition);
+        }catch(PatientNotFoundException e){
+            System.out.println(e.getMessage());
+            this.getPatientByPID();
+        }
     }
     
     /**
