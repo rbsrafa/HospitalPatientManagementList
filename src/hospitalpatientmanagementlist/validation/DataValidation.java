@@ -23,6 +23,11 @@ import java.util.regex.Pattern;
  */
 public class DataValidation {
     
+    public boolean checkMobileNumber(String mobile){
+        if(mobile.length() == 10) return true;
+        else return false;
+    }
+    
     /**
      * This method checks if the input is a valid email format.
      * @param email
