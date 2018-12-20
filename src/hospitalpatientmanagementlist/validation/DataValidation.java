@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * This class contains methods used to validate user input such as int,
  * int within defined range, String and date.
- * @author Gustavo Lessa
+ * @author Lucival
  * @author Rafael Barros
  */
 public class DataValidation {
