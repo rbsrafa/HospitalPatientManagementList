@@ -8,6 +8,9 @@ package hospitalpatientmanagementlist.exceptions;
  */
 public class PositionNotAvailableException extends RuntimeException{
 
+    /**
+     * Default contructor for PositionNotAvailableException
+     */
     public PositionNotAvailableException() {
         super("The given position is not available in the list. "
                 + "\nThe position should be equal "

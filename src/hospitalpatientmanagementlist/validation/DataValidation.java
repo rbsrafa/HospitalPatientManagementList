@@ -19,6 +19,11 @@ import java.util.regex.Pattern;
  */
 public class DataValidation {
     
+    /**
+     * This method checks if the input is a valid mobile number.
+     * @param mobile
+     * @return A validated mobile number
+     */
     public boolean checkMobileNumber(String mobile){
         Matcher matcher = Pattern.compile(
                 "^[0-9]{10}$", 
@@ -27,10 +32,6 @@ public class DataValidation {
         
         if(matcher.find()) return true;
         else return false;
-        
-//        
-//        if(mobile.length() == 10) return true;
-//        else return false;
     }
     
     /**
