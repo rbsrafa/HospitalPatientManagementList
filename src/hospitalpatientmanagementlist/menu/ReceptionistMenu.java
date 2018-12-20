@@ -134,11 +134,16 @@ public class ReceptionistMenu {
         
         try{
             if(number > this.patientList.getSize()){
-                System.out.println("\n*** Sorry the typed amount is bigger\n"
+                System.out.println("\n*** Sorry, the select number is larger\n"
                         + "than the list size ***\n");
                 removeLastPatients();
             }
-            this.patientList.removeLastPatients(number);
+            boolean patientRemoved = this.patientList.removeLastPatients(number);
+            if(patientRemoved && number > 1){
+                System.out.println("The last " + number + " patients were removed.");
+            } else if (patientRemoved && number == 1) {
+                System.out.println("The last patient was removed.");
+            }
         }catch(EmptyListException e1){
             System.out.println("\n" + e1.getMessage() + "\n");
             removeLastPatients();
