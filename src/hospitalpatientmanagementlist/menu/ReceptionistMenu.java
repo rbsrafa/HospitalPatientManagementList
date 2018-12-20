@@ -1,6 +1,7 @@
 package hospitalpatientmanagementlist.menu;
 
 import hospitalpatientmanagementlist.exceptions.EmptyListException;
+import hospitalpatientmanagementlist.exceptions.PatientNotFoundException;
 import hospitalpatientmanagementlist.exceptions.PositionNotAvailableException;
 import hospitalpatientmanagementlist.libraries.PatientList;
 import hospitalpatientmanagementlist.mockData.PatientGenerator;
@@ -9,8 +10,9 @@ import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
 
 /**
- *
- * @author rbsrafa
+ * @author 
+ * rbsrafa
+ * Lucival
  */
 public class ReceptionistMenu {
     private String title;
@@ -22,59 +24,21 @@ public class ReceptionistMenu {
     private boolean updating = false;
     
     /**
-     * Initialise a new set of Patient objects and starts the Menu.
+     * Default constructor of ReceptionistMenu.
      */
     public ReceptionistMenu(){
         this.patientList = new PatientGenerator().generateList();
         this.validate = new DataValidation();
         this.in = new Scanner(System.in);
         this.title = "Reception Menu";
-        this.setOptions();
-        this.startMenu();
-        
+        this.setOptions();     
     }
     
     /**
-     * Receives an int value that represents a Menu option and calls for 
-     * the appropriated function.
-     */
-    public void optionSelector(){
-        System.out.println("\nPlease select an option:");
-        int option = this.validate.checkForInt(in);
-        switch(option){
-            case 1: 
-                System.out.println("\nPatient List:\n");
-                this.patientList.display();
-                break;
-            case 2: 
-                this.updatePatientDetails();
-                break;
-            case 3:
-                this.getPatientByPID();
-                break;
-            case 4:
-                this.addFirst();
-                break;
-            case 5: 
-                this.addToLastPosition();
-                break;
-            case 6: 
-                this.addInPosition();
-                break;
-            case 7: 
-                this.removePatient();
-                break;
-            case 8: 
-                this.removeLastPatients();
-                break;
-            case 9: System.exit(0);
-        }
-    }
-    
-    /**
-     * Initialise the Menu
+     * Starts the menu. Displays all options on screen.
      */
     public void startMenu(){
+        this.displayWelcome();
         while(!this.exit){
             this.displayMenu();
             this.optionSelector();
@@ -82,7 +46,62 @@ public class ReceptionistMenu {
     }
     
     /**
-     * Define the options available for a Menu
+     * Activates the responsible functions related to the selected option.
+     */
+    private void optionSelector(){
+        System.out.println("\nPlease select an option:");
+        int option = this.validate.checkForInt(in);
+        switch(option){
+            case 1: this.showPatientList();
+                break;
+            case 2: this.updatePatientDetails();
+                break;
+            case 3: this.getPatientByPID();
+                break;
+            case 4: this.addFirst();             
+                break;
+            case 5: this.addToLastPosition();
+                break;
+            case 6: this.addInPosition();
+                break;
+            case 7: this.removePatient();
+                break;
+            case 8: this.removeLastPatients();
+                break;
+            case 9: System.exit(0);
+        }
+    }
+    
+    /**
+     * Show all patients present on the patient list.
+     */
+    private void showPatientList(){
+        System.out.println("\nPatient List:\n");
+        this.patientList.display();
+    }
+    
+    /**
+     * Displays the hospital welcome logo.
+     */
+    private void displayWelcome(){
+        System.out.println("  _____         _             _ \n" +
+            "  \\_   \\  __ _ | |__    __ _ | |\n" +
+            "   / /\\/ / _` || '_ \\  / _` || |\n" +
+            "/\\/ /_  | (_| || |_) || (_| || |\n" +
+            "\\____/   \\__, ||_.__/  \\__,_||_|\n" +
+            "            |_|                 "
+        );
+        System.out.println("                            _  _           _ \n" +
+            "  /\\  /\\  ___   ___  _ __  (_)| |_   __ _ | |\n" +
+            " / /_/ / / _ \\ / __|| '_ \\ | || __| / _` || |\n" +
+            "/ __  / | (_) |\\__ \\| |_) || || |_ | (_| || |\n" +
+            "\\/ /_/   \\___/ |___/| .__/ |_| \\__| \\__,_||_|\n" +
+            "                    |_|                      "
+        );
+    }
+    
+    /**
+     * Set all available options on the menu.
      */
     public void setOptions(){
         String[] options = {
@@ -100,14 +119,14 @@ public class ReceptionistMenu {
     }
     
     /**
-     * Add a Patient Object to the last position on the Patients List
+     * Add a new patient to the last position of the list.
      */
     private void addToLastPosition(){
         System.out.println(this.patientList.addLast(this.createNewPatient()));
     }
     
     /**
-     * Remove n number of Patient Objects from the Patient List
+     * Remove the last 'n' number of patients of the list.
      */
     private void removeLastPatients(){
         System.out.println("Please type the number of patients to remove");
@@ -168,7 +187,8 @@ public class ReceptionistMenu {
     }
     
     /**
-     * 
+     * Selects a Patient property to be updated. If the option is less than 1 or
+     * greater than 7 displays a error message and prompt the user for a new try.
      * @return 
      */
     private int selectPropertyToUpdate(){
@@ -180,7 +200,7 @@ public class ReceptionistMenu {
     }
     
     /**
-     * 
+     * Prompt the user with the option to select which property to update.
      * @param option
      * @param toUpdate 
      */
@@ -204,7 +224,10 @@ public class ReceptionistMenu {
             this.patientUpdateQuestions();
         }else if(option == 5){
             System.out.println("Please type the email");
-            toUpdate.setEmail(this.validate.checkForString(in));
+            String email = this.validate.checkForString(in);
+            boolean valid = this.validate.checkForEmail(email);
+            if(valid) toUpdate.setEmail(email);
+            else System.out.println("\n*** Input is not a valid email ***\n");
             this.patientUpdateQuestions();
         }else if(option ==6){
             System.out.println("Please type the city");
@@ -216,7 +239,7 @@ public class ReceptionistMenu {
     }
     
     /**
-     * 
+     * Display all available patient properties to update.
      */
     private void patientUpdateQuestions(){
         System.out.println("What you would like to update?\n"
@@ -250,7 +273,7 @@ public class ReceptionistMenu {
     }
     
     /**
-     * Display the Menu options for the Patient List
+     * Display all the available options of the Receptionist Menu.
      */
     public void displayMenu(){
         System.out.println("");
@@ -268,8 +291,13 @@ public class ReceptionistMenu {
     public void getPatientByPID() {
         System.out.println("\nPlease inform patient PID:");
         int pidToFetch = this.validate.checkForInt(in);
-        int patientPosition = this.patientList.getPositionByPID(pidToFetch);
-        System.out.println("Patient current position is: " + patientPosition);
+        try{
+            int patientPosition = this.patientList.getPositionByPID(pidToFetch);
+            System.out.println("Patient current position is: " + patientPosition);
+        }catch(PatientNotFoundException e){
+            System.out.println(e.getMessage());
+            this.getPatientByPID();
+        }
     }
     
     /**
