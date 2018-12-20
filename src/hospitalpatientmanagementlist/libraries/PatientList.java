@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hospitalpatientmanagementlist.libraries;
 
 import hospitalpatientmanagementlist.exceptions.EmptyListException;
@@ -12,7 +7,9 @@ import hospitalpatientmanagementlist.models.Patient;
 
 /**
  *
- * @author rbsrafa
+ * @author 
+ * rbsrafa
+ * Lucival
  */
 public class PatientList implements INode{
     private Node first;
@@ -300,7 +297,5 @@ public class PatientList implements INode{
         Patient p = this.getNode(position).getPatient();
         return p;
     }   
-    
-
     
 }

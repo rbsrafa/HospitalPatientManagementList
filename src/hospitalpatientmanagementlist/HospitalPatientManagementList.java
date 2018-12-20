@@ -15,5 +15,6 @@ public class HospitalPatientManagementList {
      */
     public static void main(String[] args) {
         ReceptionistMenu menu = new ReceptionistMenu();
+        menu.startMenu();
     } 
 }

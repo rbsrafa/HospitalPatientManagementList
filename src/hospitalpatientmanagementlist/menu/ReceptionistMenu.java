@@ -10,8 +10,9 @@ import hospitalpatientmanagementlist.validation.DataValidation;
 import java.util.Scanner;
 
 /**
- *
- * @author rbsrafa
+ * @author 
+ * rbsrafa
+ * Lucival
  */
 public class ReceptionistMenu {
     private String title;
@@ -22,49 +23,20 @@ public class ReceptionistMenu {
     private PatientList patientList;
     private boolean updating = false;
     
+    /**
+     * Default constructor of ReceptionistMenu.
+     */
     public ReceptionistMenu(){
         this.patientList = new PatientGenerator().generateList();
         this.validate = new DataValidation();
         this.in = new Scanner(System.in);
         this.title = "Reception Menu";
-        this.setOptions();
-        this.startMenu();
-        
+        this.setOptions();     
     }
     
-    public void optionSelector(){
-        System.out.println("\nPlease select an option:");
-        int option = this.validate.checkForInt(in);
-        switch(option){
-            case 1: 
-                System.out.println("\nPatient List:\n");
-                this.patientList.display();
-                break;
-            case 2: 
-                this.updatePatientDetails();
-                break;
-            case 3:
-                this.getPatientByPID();
-                break;
-            case 4:
-                this.addFirst();
-                break;
-            case 5: 
-                this.addToLastPosition();
-                break;
-            case 6: 
-                this.addInPosition();
-                break;
-            case 7: 
-                this.removePatient();
-                break;
-            case 8: 
-                this.removeLastPatients();
-                break;
-            case 9: System.exit(0);
-        }
-    }
-    
+    /**
+     * Starts the menu. Displays all options on screen.
+     */
     public void startMenu(){
         this.displayWelcome();
         while(!this.exit){
@@ -73,7 +45,45 @@ public class ReceptionistMenu {
         }
     }
     
-    public void displayWelcome(){
+    /**
+     * Activates the responsible functions related to the selected option.
+     */
+    private void optionSelector(){
+        System.out.println("\nPlease select an option:");
+        int option = this.validate.checkForInt(in);
+        switch(option){
+            case 1: this.showPatientList();
+                break;
+            case 2: this.updatePatientDetails();
+                break;
+            case 3: this.getPatientByPID();
+                break;
+            case 4: this.addFirst();             
+                break;
+            case 5: this.addToLastPosition();
+                break;
+            case 6: this.addInPosition();
+                break;
+            case 7: this.removePatient();
+                break;
+            case 8: this.removeLastPatients();
+                break;
+            case 9: System.exit(0);
+        }
+    }
+    
+    /**
+     * Show all patients present on the patient list.
+     */
+    private void showPatientList(){
+        System.out.println("\nPatient List:\n");
+        this.patientList.display();
+    }
+    
+    /**
+     * Displays the hospital welcome logo.
+     */
+    private void displayWelcome(){
         System.out.println("  _____         _             _ \n" +
             "  \\_   \\  __ _ | |__    __ _ | |\n" +
             "   / /\\/ / _` || '_ \\  / _` || |\n" +
@@ -90,6 +100,9 @@ public class ReceptionistMenu {
         );
     }
     
+    /**
+     * Set all available options on the menu.
+     */
     public void setOptions(){
         String[] options = {
             "Show patient list",
@@ -105,10 +118,16 @@ public class ReceptionistMenu {
         this.options = options;
     }
     
+    /**
+     * Add a new patient to the last position of the list.
+     */
     private void addToLastPosition(){
         System.out.println(this.patientList.addLast(this.createNewPatient()));
     }
     
+    /**
+     * Remove the last 'n' number of patients of the list.
+     */
     private void removeLastPatients(){
         System.out.println("Please type the number of patients to remove");
         int number = this.validate.checkForInt(in);
@@ -129,6 +148,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Removes a given patient from the list.
+     */
     private void removePatient(){
         System.out.println("Please type the patient PID");
         int PID = this.validate.checkForInt(in);
@@ -139,6 +161,9 @@ public class ReceptionistMenu {
         this.patientList.removePatient(PID);
     }
     
+    /**
+     * Updates a given patient details.
+     */
     private void updatePatientDetails(){
         this.updating = true;
         Patient toUpdate;
@@ -158,6 +183,11 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Selects a patient property to be updated. If the option is less than 1 or
+     * greater than 7 displays a error message and prompt the user for a new try.
+     * @return 
+     */
     private int selectPropertyToUpdate(){
         int option = this.validate.checkForInt(in);
             if(option < 1 || option > 7){
@@ -166,6 +196,11 @@ public class ReceptionistMenu {
         return option;
     }
     
+    /**
+     * Prompt the user with the option to select which property to update.
+     * @param option
+     * @param toUpdate 
+     */
     private void patientUpdateProperties(int option, Patient toUpdate){
         this.patientUpdateQuestions();
         if(option == 1){
@@ -186,7 +221,10 @@ public class ReceptionistMenu {
             this.patientUpdateQuestions();
         }else if(option == 5){
             System.out.println("Please type the email");
-            toUpdate.setEmail(this.validate.checkForString(in));
+            String email = this.validate.checkForString(in);
+            boolean valid = this.validate.checkForEmail(email);
+            if(valid) toUpdate.setEmail(email);
+            else System.out.println("\n*** Input is not a valid email ***\n");
             this.patientUpdateQuestions();
         }else if(option ==6){
             System.out.println("Please type the city");
@@ -197,6 +235,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Display all available patient properties to update.
+     */
     private void patientUpdateQuestions(){
         System.out.println("What you would like to update?\n"
                 + "1 - PPS Number\n"
@@ -228,6 +269,9 @@ public class ReceptionistMenu {
         //System.out.println("pps "+pps+"\nf "+firstName+"\nl "+lastName+"\nn "+mobileNumber);
     }
     
+    /**
+     * Display all the available options of the Receptionist Menu.
+     */
     public void displayMenu(){
         System.out.println("");
         System.out.println(this.title);
