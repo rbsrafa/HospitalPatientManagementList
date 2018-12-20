@@ -177,11 +177,11 @@ public class ReceptionistMenu {
         Patient toUpdate;
         
         System.out.println("Please type the patient PID");
-        toUpdate = this.patientList.getPatient(this.validate.checkForInt(in));
-        System.out.println("Patient to update:\n");
-        System.out.println(toUpdate);
-        System.out.println("");
-        this.patientUpdateQuestions();
+            toUpdate = this.patientList.getPatient(this.validate.checkForInt(in));
+            System.out.println("Patient to update:\n");
+            System.out.println(toUpdate);
+            System.out.println("");
+            this.patientUpdateQuestions();
         
         while(updating){
             this.patientUpdateProperties(
@@ -213,7 +213,10 @@ public class ReceptionistMenu {
         this.patientUpdateQuestions();
         if(option == 1){
             System.out.println("Please type the new PPS number");
-            toUpdate.setPpsNumber(this.validate.checkForString(in));
+            String pps = this.validate.checkForString(in);
+            boolean valid = this.validate.checkForPPS(pps);
+            if(valid) toUpdate.setPpsNumber(pps);
+            else System.out.println("\n*** Input is not a valid PPS number ***\n");
             this.patientUpdateQuestions();
         }else if(option == 2){
             System.out.println("Please type the first name");
