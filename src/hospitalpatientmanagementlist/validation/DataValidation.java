@@ -23,6 +23,11 @@ import java.util.regex.Pattern;
  */
 public class DataValidation {
     
+    public boolean checkMobileNumber(String mobileNumber){
+        if(mobileNumber.length() == 10) return true;
+        else return false;
+    }
+    
     public boolean checkForEmail(String email){
         Matcher matcher = Pattern.compile(
                 "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", 
