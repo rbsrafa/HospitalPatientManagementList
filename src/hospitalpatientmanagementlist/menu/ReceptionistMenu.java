@@ -122,7 +122,7 @@ public class ReceptionistMenu {
      * Add a new patient to the last position of the list.
      */
     private void addToLastPosition(){
-        System.out.println(this.patientList.addLast(this.createNewPatient()));
+        System.out.println("\n" + this.patientList.addLast(this.createNewPatient()));
     }
     
     /**
@@ -135,8 +135,7 @@ public class ReceptionistMenu {
         try{
             if(number > this.patientList.getSize()){
                 System.out.println("\n*** Sorry, the select number is larger\n"
-                        + "than the list size ***\n");
-                removeLastPatients();
+                        + "than the list size ***\n");              
             }
             boolean patientRemoved = this.patientList.removeLastPatients(number);
             if(patientRemoved && number > 1){
@@ -146,10 +145,9 @@ public class ReceptionistMenu {
             }
         }catch(EmptyListException e1){
             System.out.println("\n" + e1.getMessage() + "\n");
-            removeLastPatients();
+            
         }catch(PositionNotAvailableException e2){
-            System.out.println("\n" + e2.getMessage() + "\n");
-            removeLastPatients();
+            System.out.println("\n" + e2.getMessage() + "\n");           
         }
     }
     
@@ -158,14 +156,17 @@ public class ReceptionistMenu {
      */
     private void removePatient(){
         System.out.println("Please type the patient PID");
-        int PID = this.validate.checkForInt(in);
+        try{
+            int PID = this.validate.checkForInt(in);
         if(PID > this.patientList.getSize() || PID < 1){
             System.out.println("\n*** Sorry this patient does not exist ***\n");
-            this.removePatient();
         }
         boolean patientRemoved = this.patientList.removePatient(PID);
         if(patientRemoved){
             System.out.println("Patient PID: " + PID + " removed.");
+        }
+        }catch(EmptyListException e){
+            System.out.println(e.getMessage());
         }
     }
     
@@ -355,9 +356,9 @@ public class ReceptionistMenu {
         int pidToFetch = this.validate.checkForInt(in);
         try{
             int patientPosition = this.patientList.getPositionByPID(pidToFetch);
-            System.out.println("Patient current position is: " + patientPosition);
+            System.out.println("\nPatient current position is: " + patientPosition);
         }catch(PatientNotFoundException e){
-            System.out.println(e.getMessage());
+            System.out.println("\n*** " + e.getMessage() + " ***");
             this.getPatientByPID();
         }
     }
@@ -366,7 +367,7 @@ public class ReceptionistMenu {
      * Add a new Patient at the first position of the Patient List
      */
     public void addFirst() {
-        System.out.println(this.patientList.addFirst(this.createNewPatient())); 
+        System.out.println("\n" + this.patientList.addFirst(this.createNewPatient())); 
     }
     
     /**
