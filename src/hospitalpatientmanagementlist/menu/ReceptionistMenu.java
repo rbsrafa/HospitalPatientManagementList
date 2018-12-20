@@ -177,18 +177,24 @@ public class ReceptionistMenu {
         Patient toUpdate;
         
         System.out.println("Please type the patient PID");
+        try{
             toUpdate = this.patientList.getPatient(this.validate.checkForInt(in));
             System.out.println("Patient to update:\n");
             System.out.println(toUpdate);
             System.out.println("");
             this.patientUpdateQuestions();
-        
-        while(updating){
+            
+            while(updating){
             this.patientUpdateProperties(
                     this.selectPropertyToUpdate(), 
                     toUpdate
             );
         }
+        }catch(PatientNotFoundException e){
+            System.out.println("\n" + e.getMessage() + "\n");
+            this.updatePatientDetails();
+        }
+  
     }
     
     /**
