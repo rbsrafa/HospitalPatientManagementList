@@ -20,8 +20,17 @@ import java.util.regex.Pattern;
 public class DataValidation {
     
     public boolean checkMobileNumber(String mobile){
-        if(mobile.length() == 10) return true;
+        Matcher matcher = Pattern.compile(
+                "^[0-9]{10}$", 
+                Pattern.CASE_INSENSITIVE
+        ).matcher(mobile);
+        
+        if(matcher.find()) return true;
         else return false;
+        
+//        
+//        if(mobile.length() == 10) return true;
+//        else return false;
     }
     
     /**

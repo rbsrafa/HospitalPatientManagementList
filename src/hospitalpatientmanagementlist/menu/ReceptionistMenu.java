@@ -221,19 +221,28 @@ public class ReceptionistMenu {
             System.out.println("Please type the new PPS number");
             String pps = this.validate.checkForString(in);
             boolean valid = this.validate.checkForPPS(pps);
-            if(valid) toUpdate.setPpsNumber(pps);
-            else System.out.println("\n*** Input is not a valid PPS number ***\n");
+            if(valid) {
+                toUpdate.setPpsNumber(pps);
+                System.out.println("\nPPS Number successfully updated\n");
+            }
+            else System.out.println("\n*** Input is not a valid PPS number ***\n"
+                    + "Please use the following format: 1234567LL\n");
             this.patientUpdateQuestions();
+            
         }else if(option == 2){
-            System.out.println("Please type the first name");
+            System.out.println("Please type the First Name");
             toUpdate.setFirstName(this.validate.checkForString(in));
+            System.out.println("\nFirst Name successfully updated\n");
             this.patientUpdateQuestions();
+            
         }else if(option == 3){
-            System.out.println("Please type the last name");
+            System.out.println("Please type the Last Name");
             toUpdate.setLastName(this.validate.checkForString(in));
+            System.out.println("\nLast Name successfully updated\n");
             this.patientUpdateQuestions();
+            
         }else if(option == 4){
-            System.out.println("Please type the mobile number");
+            System.out.println("Please type the Mobile Number");
             String mobileNumber = this.validate.checkForString(in);
             boolean valid = this.validate.checkMobileNumber(mobileNumber);
             if(valid) {
@@ -242,8 +251,9 @@ public class ReceptionistMenu {
             }
             else System.out.println("\n*** Invalid Mobile Number, it should have 10 digits without blanc spaces ***\n");
             this.patientUpdateQuestions();
+            
         }else if(option == 5){
-            System.out.println("Please type the email");
+            System.out.println("Please type the Email");
             String email = this.validate.checkForString(in);
             boolean valid = this.validate.checkForEmail(email);
             if(valid) {
@@ -252,10 +262,13 @@ public class ReceptionistMenu {
             }
             else System.out.println("\n*** Input is not a valid email ***\n");
             this.patientUpdateQuestions();
+            
         }else if(option ==6){
-            System.out.println("Please type the city");
+            System.out.println("Please type the City");
             toUpdate.setCity(this.validate.checkForString(in));
+            System.out.println("\nCity successfully updated\n");
             this.patientUpdateQuestions();
+            
         }else if(option == 7){
             updating = false;
         }
@@ -279,20 +292,46 @@ public class ReceptionistMenu {
      * Get information from user to create a new Patient
      */
     public Patient createNewPatient() {
-        System.out.println("\nPlease inform patient PPS:");
-        String pps = this.in.next();
+        boolean validPPS = false, validMobile = false, 
+                validEmail = false;
+        
+        String pps = "", firstName = "", lastName = "", 
+               mobileNumber = "", email = "", city = "";
+        
+        while(!validPPS) {
+            System.out.println("\nPlease inform patient PPS:");
+            pps = this.validate.checkForString(in);
+            validPPS = this.validate.checkForPPS(pps);
+            if(!validPPS) System.out.println("\n*** Input is not a valid PPS number ***\n"
+                    + "Please use the following format: 1234567LL\n");
+        }        
+        
         System.out.println("\nPlease inform patient First Name:");
-        String firstName = this.in.next();
+        firstName = this.validate.checkForString(in);
+        
         System.out.println("\nPlease inform patient Last Name:");
-        String lastName = this.in.next();
-        System.out.println("\nPlease inform patient Mobile Number:");
-        String mobileNumber = this.in.next();
-        System.out.println("\nPlease inform patient email:");
-        String email = this.in.next();
+        lastName = this.validate.checkForString(in);
+        
+        while(!validMobile){
+            System.out.println("\nPlease inform patient Mobile Number:");
+            mobileNumber = this.validate.checkForString(in);
+            validMobile = this.validate.checkMobileNumber(mobileNumber);
+            if(!validMobile) System.out.println("\n*** Invalid Mobile Number, "
+                    + "it should have 10 digits without blanc spaces ***\n");
+        }
+        
+        while(!validEmail){
+            System.out.println("\nPlease inform patient email:");
+            email = this.validate.checkForString(in);
+            validEmail = this.validate.checkForEmail(email);
+            if(!validEmail) System.out.println("\n*** Input is not a valid email ***\n");
+        }
+        
         System.out.println("\nPlease inform patient city:");
-        String city = this.in.next();
+        city = this.in.next();
+        
         return new Patient(pps, firstName, lastName, mobileNumber, email, city);
-        //System.out.println("pps "+pps+"\nf "+firstName+"\nl "+lastName+"\nn "+mobileNumber);
+        
     }
     
     /**
