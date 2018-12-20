@@ -21,6 +21,9 @@ public class ReceptionistMenu {
     private PatientList patientList;
     private boolean updating = false;
     
+    /**
+     * Initialise a new set of Patient objects and starts the Menu.
+     */
     public ReceptionistMenu(){
         this.patientList = new PatientGenerator().generateList();
         this.validate = new DataValidation();
@@ -31,6 +34,10 @@ public class ReceptionistMenu {
         
     }
     
+    /**
+     * Receives an int value that represents a Menu option and calls for 
+     * the appropriated function.
+     */
     public void optionSelector(){
         System.out.println("\nPlease select an option:");
         int option = this.validate.checkForInt(in);
@@ -64,6 +71,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Initialise the Menu
+     */
     public void startMenu(){
         while(!this.exit){
             this.displayMenu();
@@ -71,6 +81,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Define the options available for a Menu
+     */
     public void setOptions(){
         String[] options = {
             "Show patient list",
@@ -86,10 +99,16 @@ public class ReceptionistMenu {
         this.options = options;
     }
     
+    /**
+     * Add a Patient Object to the last position on the Patients List
+     */
     private void addToLastPosition(){
         System.out.println(this.patientList.addLast(this.createNewPatient()));
     }
     
+    /**
+     * Remove n number of Patient Objects from the Patient List
+     */
     private void removeLastPatients(){
         System.out.println("Please type the number of patients to remove");
         int number = this.validate.checkForInt(in);
@@ -110,6 +129,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * Removes a Patient object from the Patient List
+     */
     private void removePatient(){
         System.out.println("Please type the patient PID");
         int PID = this.validate.checkForInt(in);
@@ -117,9 +139,15 @@ public class ReceptionistMenu {
             System.out.println("\n*** Sorry this patient does not exist ***\n");
             this.removePatient();
         }
-        this.patientList.removePatient(PID);
+        boolean patientRemoved = this.patientList.removePatient(PID);
+        if(patientRemoved){
+            System.out.println("Patient PID: " + PID + " removed.");
+        }
     }
     
+    /**
+     * Updates a Patient object details
+     */
     private void updatePatientDetails(){
         this.updating = true;
         Patient toUpdate;
@@ -139,6 +167,10 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * 
+     * @return 
+     */
     private int selectPropertyToUpdate(){
         int option = this.validate.checkForInt(in);
             if(option < 1 || option > 7){
@@ -147,6 +179,11 @@ public class ReceptionistMenu {
         return option;
     }
     
+    /**
+     * 
+     * @param option
+     * @param toUpdate 
+     */
     private void patientUpdateProperties(int option, Patient toUpdate){
         this.patientUpdateQuestions();
         if(option == 1){
@@ -178,6 +215,9 @@ public class ReceptionistMenu {
         }
     }
     
+    /**
+     * 
+     */
     private void patientUpdateQuestions(){
         System.out.println("What you would like to update?\n"
                 + "1 - PPS Number\n"
@@ -209,6 +249,9 @@ public class ReceptionistMenu {
         //System.out.println("pps "+pps+"\nf "+firstName+"\nl "+lastName+"\nn "+mobileNumber);
     }
     
+    /**
+     * Display the Menu options for the Patient List
+     */
     public void displayMenu(){
         System.out.println("");
         System.out.println(this.title);
