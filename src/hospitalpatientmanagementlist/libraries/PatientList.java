@@ -67,7 +67,7 @@ public class PatientList implements INode{
      * Add a given patient as the first of the list, if the list is not
      * empty, set the old first patient as second of the list.
      * @param patient
-     * @return the new first patient in the list
+     * @return the new first Patient in the list
      */
     @Override
     public Patient addFirst(Patient patient) {
@@ -77,8 +77,8 @@ public class PatientList implements INode{
     }
     
     /**
-     * Get the first node of the list
-     * @return the first node
+     * Gets the first Patient object from the Patient List
+     * @return the first Patient object on the List
      */
     public Patient getFirst() {
         if(this.isEmpty()) throw new EmptyListException();
@@ -207,6 +207,11 @@ public class PatientList implements INode{
         return false;
     }
     
+    /**
+     * Removes the first Patient from the Patient List.
+     * If list is empty throw EmptyListException.
+     * @return true if removed or false otherwise
+     */
     private boolean removeFirst(){
         if(this.isEmpty()) throw new EmptyListException();
         this.first = this.first.getNext();
@@ -270,7 +275,7 @@ public class PatientList implements INode{
      * If list is empty throw EmptyListException.
      * If name it is not in the list throw PatientNotFoundException.
      * @param PID
-     * @return the patient position when found otherwise returns -1
+     * @return the Patient object position when found otherwise returns -1
      */
     @Override
     public int getPositionByPID(int PID) {
@@ -291,6 +296,11 @@ public class PatientList implements INode{
         throw new PatientNotFoundException(PID);
     }
  
+    /**
+     * Gets a Patient from the Patient List using the PID value
+     * @param PID
+     * @return a Patient object
+     */
     @Override
     public Patient getPatient(int PID) {
         int position = this.getPositionByPID(PID);

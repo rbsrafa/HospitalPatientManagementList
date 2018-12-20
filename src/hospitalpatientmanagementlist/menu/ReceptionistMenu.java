@@ -149,7 +149,7 @@ public class ReceptionistMenu {
     }
     
     /**
-     * Removes a given patient from the list.
+     * Removes a Patient object from the Patient List
      */
     private void removePatient(){
         System.out.println("Please type the patient PID");
@@ -158,11 +158,14 @@ public class ReceptionistMenu {
             System.out.println("\n*** Sorry this patient does not exist ***\n");
             this.removePatient();
         }
-        this.patientList.removePatient(PID);
+        boolean patientRemoved = this.patientList.removePatient(PID);
+        if(patientRemoved){
+            System.out.println("Patient PID: " + PID + " removed.");
+        }
     }
     
     /**
-     * Updates a given patient details.
+     * Updates a Patient object details
      */
     private void updatePatientDetails(){
         this.updating = true;
@@ -184,7 +187,7 @@ public class ReceptionistMenu {
     }
     
     /**
-     * Selects a patient property to be updated. If the option is less than 1 or
+     * Selects a Patient property to be updated. If the option is less than 1 or
      * greater than 7 displays a error message and prompt the user for a new try.
      * @return 
      */
