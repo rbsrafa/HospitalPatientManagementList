@@ -23,16 +23,31 @@ import java.util.regex.Pattern;
  */
 public class DataValidation {
     
-    public boolean checkMobileNumber(String mobileNumber){
-        if(mobileNumber.length() == 10) return true;
-        else return false;
-    }
-    
+    /**
+     * This method checks if the input is a valid email format.
+     * @param email
+     * @return A validated email
+     */
     public boolean checkForEmail(String email){
         Matcher matcher = Pattern.compile(
                 "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", 
                 Pattern.CASE_INSENSITIVE
         ).matcher(email);
+        
+        if(matcher.find()) return true;
+        else return false;
+    }
+    
+    /**
+     * This method checks if the input is a valid PPS format.
+     * @param pps
+     * @return A validated PPS number
+     */
+    public boolean checkForPPS(String pps){
+        Matcher matcher = Pattern.compile(
+                "^\\d{7}?[A-Z]{1,2}$", 
+                Pattern.CASE_INSENSITIVE
+        ).matcher(pps);
         
         if(matcher.find()) return true;
         else return false;
