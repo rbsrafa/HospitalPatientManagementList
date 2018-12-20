@@ -234,13 +234,22 @@ public class ReceptionistMenu {
             this.patientUpdateQuestions();
         }else if(option == 4){
             System.out.println("Please type the mobile number");
-            toUpdate.setMobileNumber(this.validate.checkForString(in));
+            String mobileNumber = this.validate.checkForString(in);
+            boolean valid = this.validate.checkMobileNumber(mobileNumber);
+            if(valid) {
+                toUpdate.setMobileNumber(mobileNumber);
+                System.out.println("\nMobile number successfully updated\n");
+            }
+            else System.out.println("\n*** Invalid Mobile Number, it should have 10 digits without blanc spaces ***\n");
             this.patientUpdateQuestions();
         }else if(option == 5){
             System.out.println("Please type the email");
             String email = this.validate.checkForString(in);
             boolean valid = this.validate.checkForEmail(email);
-            if(valid) toUpdate.setEmail(email);
+            if(valid) {
+                toUpdate.setEmail(email);
+                System.out.println("\nEmail successfully updated\n");
+            }
             else System.out.println("\n*** Input is not a valid email ***\n");
             this.patientUpdateQuestions();
         }else if(option ==6){
