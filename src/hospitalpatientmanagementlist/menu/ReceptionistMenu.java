@@ -329,7 +329,7 @@ public class ReceptionistMenu {
         }
         
         System.out.println("\nPlease inform patient city:");
-        city = this.in.next();
+        city = this.validate.checkForString(in);
         
         return new Patient(pps, firstName, lastName, mobileNumber, email, city);
         
@@ -382,6 +382,12 @@ public class ReceptionistMenu {
             this.addInPosition();
         }
         
-        this.patientList.addInPosition(this.createNewPatient(), position);
+        try{
+            this.patientList.addInPosition(this.createNewPatient(), position);
+        }catch(PositionNotAvailableException e){
+            System.out.println("\n" + e.getMessage());
+            this.addInPosition();
+        }
+        
     }
 }
