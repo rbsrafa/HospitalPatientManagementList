@@ -14,11 +14,16 @@ import java.util.regex.Pattern;
 /**
  * This class contains methods used to validate user input such as int,
  * int within defined range, String and date.
- * @author Gustavo Lessa
+ * @author Lucival
  * @author Rafael Barros
  */
 public class DataValidation {
     
+    /**
+     * This method checks if the input is a valid mobile number.
+     * @param mobile
+     * @return A validated mobile number
+     */
     public boolean checkMobileNumber(String mobile){
         Matcher matcher = Pattern.compile(
                 "^[0-9]{10}$", 
@@ -27,10 +32,6 @@ public class DataValidation {
         
         if(matcher.find()) return true;
         else return false;
-        
-//        
-//        if(mobile.length() == 10) return true;
-//        else return false;
     }
     
     /**

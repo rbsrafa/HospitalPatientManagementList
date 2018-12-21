@@ -40,6 +40,10 @@ public class PatientGenerator {
         return patients;
     }
     
+    /**
+     * Generates and return a mock list of patients
+     * @return 
+     */
     public PatientList generateList(){
         PatientList patientList = new PatientList();
         Patient[] patients = this.generatePatients();
