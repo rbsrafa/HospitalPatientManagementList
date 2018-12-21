@@ -186,11 +186,11 @@ public class ReceptionistMenu {
             this.patientUpdateQuestions();
             
             while(updating){
-            this.patientUpdateProperties(
+                this.patientUpdateProperties(
                     this.selectPropertyToUpdate(), 
                     toUpdate
-            );
-        }
+                );
+            }
         }catch(PatientNotFoundException e){
             System.out.println("\n" + e.getMessage() + "\n");
             this.updatePatientDetails();

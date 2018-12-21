@@ -98,7 +98,7 @@ public class DataValidation {
         String ans = "";
         while(ans.isEmpty()){
             try{
-               ans = input.nextLine();}
+               ans += input.nextLine();}
             catch(InputMismatchException e){
                System.out.println("\n*** Input not valid. Please try again. ***\n");
                return checkForString(input);
